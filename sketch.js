@@ -86,15 +86,16 @@ function draw() {
 	background(200);
 
 	strokeWeight(1);
-	fill(100, 150, 20);
-	textSize(25);
-	text("Score: " + score, windowWidth/10, 32);
+	noStroke();
+	fill(50, 250, 20);
+	textSize(50);
+	text("Score: " + score, windowWidth/10, 70);
 	
-	fill(255, 0, 250);
-	text("Lives: " + lives, windowWidth/1.3, 32);
+	fill(255, 0, 100);
+	text("Lives: " + lives, windowWidth/1.5, 70);
 	
-	fill(0, 0, 255);
-	text("Fall Speed: " + fallSpeed, windowWidth/10, height-104);
+	fill(0);
+	text("Fall Speed: " + fallSpeed, windowWidth/10, height-84);
 
 	if (gameOver) {
 		textAlign(CENTER);

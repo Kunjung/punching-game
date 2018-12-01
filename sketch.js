@@ -4,13 +4,21 @@ let gameOver;
 
 let rightButton;
 let leftButton;
+
+let upButton;
+let downButton;
+
 let buttonSize = 40;
 let fallSpeed = 5;
 
 
 let rightWindow;
 let leftWindow;
-let windowSize = 100;
+
+let upWindow;
+let downWindow;
+
+let windowSize = 150;
 
 let buffer = 20;
 
@@ -27,15 +35,24 @@ function setup() {
 	score = 0;
 	lives = 10;
 
-	let leftPose = createVector(windowWidth/2 - windowSize - buffer, height - 2 * windowSize);
-	let rightPose = createVector(windowWidth/2 + windowSize + buffer, height - 2 * windowSize);
+	let leftPose 	= createVector(windowWidth/2 - windowSize - buffer, height - 1.4 * windowSize);
+	let rightPose	= createVector(windowWidth/2 + windowSize + buffer, height - 1.4 * windowSize);
+
+	let upPose 		= createVector(windowWidth/2 - 2.4 * windowSize -  buffer, height - 1.4 * windowSize);
+	let downPose 	= createVector(windowWidth/2 + 2.4 * windowSize +  buffer, height - 1.4 * windowSize);
 
 	leftButton = new Button(leftPose.x, 0, buttonSize);
 	rightButton = new Button(rightPose.x, 0, buttonSize);
 
+	upButton = new Button(upPose.x, 0, buttonSize);
+	downButton = new Button(downPose.x, 0, buttonSize);
+
 	
 	leftWindow = new Window(leftPose.x, leftPose.y, windowSize);
 	rightWindow = new Window(rightPose.x, rightPose.y, windowSize);
+
+	upWindow = new Window(upPose.x, upPose.y, windowSize);
+	downWindow = new Window(downPose.x, downPose.y, windowSize);
 
 }
 
@@ -46,7 +63,7 @@ function keyPressed() {
 	if (key === '%') {
 		if (leftWindow.contains(leftButton)) {
 			console.log('left hit');
-			score++;
+			score += 10;
 		} else {
 			console.log('left miss');
 			lives--;
@@ -58,7 +75,7 @@ function keyPressed() {
 	} else if (key === "'") {
 		if (rightWindow.contains(rightButton)) {
 			console.log('right hit');
-			score++;
+			score += 10;
 		} else {
 			console.log('right miss');
 			lives--;
@@ -66,6 +83,8 @@ function keyPressed() {
 				gameOver = true;
 			}
 		}
+
+	// check for up and down key like above
 
 }
 
@@ -85,17 +104,18 @@ function draw() {
 
 	background(200);
 
-	strokeWeight(1);
-	noStroke();
-	fill(50, 250, 20);
+	strokeWeight(8);
+	stroke(0);
+	fill(255);
 	textSize(50);
 	text("Score: " + score, windowWidth/10, 70);
 	
+	noStroke();
 	fill(255, 0, 100);
 	text("Lives: " + lives, windowWidth/1.5, 70);
 	
 	fill(0);
-	text("Fall Speed: " + fallSpeed, windowWidth/10, height-84);
+	text("Gravity: " + fallSpeed + " m/s", windowWidth/10, height-84);
 
 	if (gameOver) {
 		textAlign(CENTER);
@@ -116,8 +136,16 @@ function draw() {
 	leftButton.fall(fallSpeed);
 	leftButton.show();
 
+	upButton.fall(fallSpeed);
+	upButton.show();
+	downButton.fall(fallSpeed);
+	downButton.show();
+
 	rightWindow.show();
 	leftWindow.show();
+
+	upWindow.show();
+	downWindow.show();
 
 
 }

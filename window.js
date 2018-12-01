@@ -8,7 +8,7 @@ class Window {
 	show() {
 		rectMode(CENTER);
 		strokeWeight(10);
-		stroke(255, 0, 0);
+		stroke(255);
 		noFill();
 		rect(this.x, this.y, this.size, this.size);
 	}

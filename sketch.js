@@ -83,11 +83,34 @@ function keyPressed() {
 				gameOver = true;
 			}
 		}
+	}
 
 	// check for up and down key like above
+	if (key === '&') {
+		if (upWindow.contains(upButton)) {
+			console.log('up hit');
+			score += 10;
+		} else {
+			console.log('up miss');
+			lives--;
+			if (lives <= 0) {
+				gameOver = true;
+			}
+		}
+	
+	} else if (key === "(") {
+		if (downWindow.contains(downButton)) {
+			console.log('down hit');
+			score += 10;
+		} else {
+			console.log('down miss');
+			lives--;
+			if (lives <= 0) {
+				gameOver = true;
+			}
+		}
 
-}
-
+	}
 
 
 }

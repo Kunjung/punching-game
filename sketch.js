@@ -24,6 +24,12 @@ let buffer = 20;
 
 let song;
 
+
+let leftPose;
+let rightPose;
+let upPose;
+let downPose;
+
 function preload() {
 	song = loadSound('song.MP3');
 }
@@ -35,11 +41,11 @@ function setup() {
 	score = 0;
 	lives = 10;
 
-	let leftPose 	= createVector(windowWidth/2 - windowSize - buffer, height - 1.4 * windowSize);
-	let rightPose	= createVector(windowWidth/2 + windowSize + buffer, height - 1.4 * windowSize);
+	leftPose 	= createVector(windowWidth/2 - windowSize - buffer, height - 1.4 * windowSize);
+	rightPose	= createVector(windowWidth/2 + windowSize + buffer, height - 1.4 * windowSize);
 
-	let upPose 		= createVector(windowWidth/2 - 2.4 * windowSize -  buffer, height - 1.4 * windowSize);
-	let downPose 	= createVector(windowWidth/2 + 2.4 * windowSize +  buffer, height - 1.4 * windowSize);
+	upPose 		= createVector(windowWidth/2 - 2.4 * windowSize -  buffer, height - 1.4 * windowSize);
+	downPose 	= createVector(windowWidth/2 + 2.4 * windowSize +  buffer, height - 1.4 * windowSize);
 
 	leftButton = new Button(leftPose.x, 0, buttonSize);
 	rightButton = new Button(rightPose.x, 0, buttonSize);
@@ -60,7 +66,7 @@ function setup() {
 function keyPressed() {
 	// check if window contains the button well
 	console.log(key);
-	if (key === '%') {
+	if (key === 'D') {
 		if (leftWindow.contains(leftButton)) {
 			console.log('left hit');
 			score += 10;
@@ -72,7 +78,7 @@ function keyPressed() {
 			}
 		}
 	
-	} else if (key === "'") {
+	} else if (key === "J") {
 		if (rightWindow.contains(rightButton)) {
 			console.log('right hit');
 			score += 10;
@@ -86,7 +92,7 @@ function keyPressed() {
 	}
 
 	// check for up and down key like above
-	if (key === '&') {
+	if (key === 'S') {
 		if (upWindow.contains(upButton)) {
 			console.log('up hit');
 			score += 10;
@@ -98,7 +104,7 @@ function keyPressed() {
 			}
 		}
 	
-	} else if (key === "(") {
+	} else if (key === "K") {
 		if (downWindow.contains(downButton)) {
 			console.log('down hit');
 			score += 10;
@@ -139,7 +145,13 @@ function draw() {
 	
 	fill(0);
 	text("Gravity: " + fallSpeed + " m/s", windowWidth/10, height-84);
-
+	
+	text("S", upPose.x, upPose.y);
+	text("D", leftPose.x, leftPose.y);
+	
+	text("J", rightPose.x, rightPose.y);
+	text("K", downPose.x, downPose.y);
+	
 	if (gameOver) {
 		textAlign(CENTER);
 		textSize(120);
@@ -156,8 +168,10 @@ function draw() {
 
 	rightButton.fall(fallSpeed);
 	rightButton.show();
+
 	leftButton.fall(fallSpeed);
 	leftButton.show();
+
 
 	upButton.fall(fallSpeed);
 	upButton.show();
